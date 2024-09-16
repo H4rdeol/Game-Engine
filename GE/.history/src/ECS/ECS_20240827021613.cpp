@@ -1,0 +1,37 @@
+/*
+** EPITECH PROJECT, 2024
+** GE [WSL: Ubuntu]
+** File description:
+** ECS.cpp
+*/
+
+#include "ECS.hpp"
+
+namespace ECS
+{
+    static ECS *s_Instance = nullptr;
+
+    void ECS::Init()
+    {
+        assert(!s_Instance);
+
+        s_Instance = new ECS();
+    }
+
+    void ECS::Shutdown()
+    {
+        assert(s_Instance);
+
+        delete s_Instance;
+        s_Instance = nullptr;
+    }
+
+    ECS &ECS::GetInstance()
+    {
+        assert(s_Instance);
+
+        return *s_Instance;
+    }
+
+    
+}

@@ -1,0 +1,12 @@
+cmake_minimum_required(VERSION 3.12)
+project(MyProject)
+
+set(CMAKE_CXX_STANDARD 20)
+
+find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
+add_executable(MyProject
+    src/Main.cpp
+    src/Application/Application.cpp
+    src/ECS/ECS.cpp)
+
+target_link_libraries(MyProject PRIVATE sfml-graphics sfml-window sfml-system)
