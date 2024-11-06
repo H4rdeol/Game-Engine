@@ -1,3 +1,0 @@
-/home/hardeol/Epitech/GE/build/CMakeFiles/MyProject.dir
-/home/hardeol/Epitech/GE/build/CMakeFiles/edit_cache.dir
-/home/hardeol/Epitech/GE/build/CMakeFiles/rebuild_cache.dir

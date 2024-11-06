@@ -1,4 +1,0 @@
-    CompileFlags:
-      #C++20
-      Add: [-std=c++20]
-      
