@@ -22,29 +22,32 @@ namespace ECS
         public:
             class ECSError : public std::exception {
                 public:
-                    ECSError(const std::string &msg);
-                    const char *what() const noexcept override;
+                    explicit ECSError(std::string msg);
+                    [[nodiscard]] const char *what() const noexcept override;
                 private:
                     std::string p_msg;
             };
 
             ECS(const ECS &) = delete;
-            ECS &operator=(const ECS &) = delete;
+            ECS &operator = (const ECS &) = delete;
 
             static void Init();
             static void Shutdown();
             static ECS &GetInstance();
 
             void AddEntity();
-            void RemoveEntity(const Entity entity);
-            bool HasEntity(const Entity entity) const;
+            void RemoveEntity(std::size_t id);
+            [[nodiscard]] bool HasEntity(const Entity& entity) const;
+            [[nodiscard]] Entity &getEntity(std::size_t id);
+            [[nodiscard]] std::shared_ptr<ComponentsManager> getComponentsMapper();
+            [[maybe_unused]] void RemoveEntity(const Entity &entity);
 
-            void PrintEntities() const; // * Use for debug
+            [[maybe_unused]] void PrintEntities() const; // * Use for debug
         private:
             ECS() = default;
             ~ECS() = default;
         private:
             std::vector<Entity> p_entities;
-            std::unique_ptr<ComponentsManager> p_componentsMapper;
+            std::shared_ptr<ComponentsManager> p_componentsMapper;
     };
 }

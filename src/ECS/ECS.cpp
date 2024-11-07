@@ -9,10 +9,11 @@
 #include "ComponentManager/ComponentManager.hpp"
 
 #include <iostream>
+#include <utility>
 
 namespace ECS
 {
-    ECS::ECSError::ECSError(const std::string &msg) : p_msg(msg)
+    ECS::ECSError::ECSError(std::string msg) : p_msg(std::move(msg))
     {}
 
     const char* ECS::ECSError::what() const noexcept
@@ -52,7 +53,20 @@ namespace ECS
         });
     }
 
-    void ECS::RemoveEntity(Entity entity)
+    void ECS::RemoveEntity(std::size_t id)
+    {
+        auto it = p_entities.begin();
+
+        for (; it != p_entities.end(); ++it) {
+            if (it->id == id)
+                break;
+        }
+        if (it == p_entities.end())
+            throw ECSError("Entity with ID = " + std::to_string(id) + " does not exist");
+        p_entities.erase(it);
+    }
+
+    [[maybe_unused]] void ECS::RemoveEntity(const Entity &entity)
     {
         auto it = p_entities.begin();
 
@@ -65,7 +79,7 @@ namespace ECS
         p_entities.erase(it);
     }
 
-    bool ECS::HasEntity(Entity entity) const
+    bool ECS::HasEntity(const Entity& entity) const
     {
         auto it = p_entities.begin();
 
@@ -76,9 +90,23 @@ namespace ECS
         return it != p_entities.end();
     }
 
-    void ECS::PrintEntities() const
+    [[maybe_unused]] void ECS::PrintEntities() const
     {
         for (const auto &entity : p_entities)
             std::cout << entity.id << std::endl;
+    }
+
+    Entity &ECS::getEntity(std::size_t id)
+    {
+        for (auto &entity : p_entities) {
+            if (entity.id == id)
+                return entity;
+        }
+        throw ECSError("Entity with ID = " + std::to_string(id) + " does not exist");
+    }
+
+    std::shared_ptr<ComponentsManager> ECS::getComponentsMapper()
+    {
+        return p_componentsMapper;
     }
 }

@@ -13,5 +13,6 @@ namespace ECS
     ComponentsManager::ComponentsManager()
     {
         RegisterComponent<Components::PositionsComponents>();
+        RegisterComponent<Components::SpriteComponents>();
     }
 }

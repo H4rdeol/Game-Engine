@@ -26,8 +26,9 @@ namespace ECS
             void AddComponent(Entity &entity, C &component, Args... args)
             {
                 assert(ECS::GetInstance().HasEntity(entity));
+                va_list argsList;
 
-                component.AddToEntity(entity, args...);
+                component.AddToEntity(entity, argsList, args...);
             }
 
             template<class C>
