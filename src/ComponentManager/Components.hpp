@@ -22,7 +22,7 @@ namespace ECS::Components
 
             void AddToEntity(Entity &entity, va_list args, ...) override;
             void RemoveFromEntity(Entity &entity) override;
-        private:
+        public:
             std::vector<std::pair<double, double>> m_positions;
     };
 
@@ -33,9 +33,9 @@ namespace ECS::Components
 
             void AddToEntity(Entity &entity, va_list args, ...) override;
             void RemoveFromEntity(Entity &entity) override;
+            std::vector<sf::Sprite> m_sprite;
         private:
             std::vector<sf::Texture> m_texture;
-            std::vector<sf::Sprite> m_sprite;
     };
 
 }

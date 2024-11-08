@@ -20,7 +20,7 @@ int main(UNUSED int argc, UNUSED char *argv[])
     App::Application myApp {
         {
             sf::Vector2u(1920, 1080),
-            "Test je cho",
+            "Snook",
             60,
             32
         }
@@ -34,9 +34,9 @@ int main(UNUSED int argc, UNUSED char *argv[])
         540.0
     );
     ECS::ECS::GetInstance().getComponentsMapper()->AddComponent<ECS::Components::SpriteComponents, char *>(
-            ECS::ECS::GetInstance().getEntity(0),
-            give_me_a_name2,
-            name
+        ECS::ECS::GetInstance().getEntity(0),
+        give_me_a_name2,
+        name
     );
 
 
