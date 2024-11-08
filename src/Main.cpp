@@ -13,8 +13,6 @@
 int main(UNUSED int argc, UNUSED char *argv[])
 {
     ECS::ECS::Init();
-    ECS::Components::PositionsComponents give_me_a_name;
-    ECS::Components::SpriteComponents give_me_a_name2;
     char name[] = "assets/snook.jpg";
 
     App::Application myApp {
@@ -31,8 +29,8 @@ int main(UNUSED int argc, UNUSED char *argv[])
     ECS::ECS::GetInstance().getComponentsMapper()->AddComponent<ECS::Components::PositionsComponents, double, double>(
         ECS::ECS::GetInstance().getEntity(0),
         dynamic_cast<ECS::Components::PositionsComponents&>(*ECS::ECS::GetInstance().getComponentsMapper()->GetComponent<ECS::Components::PositionsComponents>(ECS::ECS::GetInstance().getEntity(0))),
-        0.0,
-        0.0
+        300.0,
+        500.0
     );
     ECS::ECS::GetInstance().getComponentsMapper()->AddComponent<ECS::Components::SpriteComponents, char *>(
         ECS::ECS::GetInstance().getEntity(0),
