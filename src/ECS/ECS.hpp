@@ -13,6 +13,8 @@
 #include <memory>
 
 #include "ECS/Entity.h"
+#include "Application/Application.hpp"
+#include "Systems/Systems.hpp"
 
 namespace ECS
 {
@@ -40,14 +42,18 @@ namespace ECS
             [[nodiscard]] bool HasEntity(const Entity& entity) const;
             [[nodiscard]] Entity &getEntity(std::size_t id);
             [[nodiscard]] std::shared_ptr<ComponentsManager> getComponentsMapper();
+            [[nodiscard]] std::shared_ptr<SystemsManager> getSystemsManager();
             [[maybe_unused]] void RemoveEntity(const Entity &entity);
 
             [[maybe_unused]] void PrintEntities() const; // * Use for debug
+
+            App::Application *App{};
         private:
-            ECS() = default;
+            ECS();
             ~ECS() = default;
         private:
             std::vector<Entity> p_entities;
+            std::shared_ptr<SystemsManager> p_systemsManager;
             std::shared_ptr<ComponentsManager> p_componentsMapper;
     };
 }

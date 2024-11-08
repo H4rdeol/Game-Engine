@@ -9,6 +9,8 @@
     #define MYPROJECT_SYSTEMS_HPP
 
     #include "ASystems.hpp"
+    #include "Application/Application.hpp"
+
     #include <array>
     #include <memory>
 
@@ -23,6 +25,9 @@ namespace ECS {
             };
             SystemsManager();
             ~SystemsManager() = default;
+
+            std::unique_ptr<ASystems> &operator[](SystemType type);
+            void Update(float deltaTime);
 
         private:
             std::array<std::unique_ptr<ASystems>, (std::size_t)SystemType::COUNT> _systems;

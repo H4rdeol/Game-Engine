@@ -6,11 +6,13 @@
 */
 
 #include "ASystems.hpp"
+#include <iostream>
 
 namespace ECS {
     void ASystems::AddEntity(Entity &entity)
     {
         _entities.push_back(entity);
+        std::cout << "Entity added" << std::endl;
     }
 
     void ASystems::RemoveEntity(Entity &entity)

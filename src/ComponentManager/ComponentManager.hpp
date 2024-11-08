@@ -43,9 +43,21 @@ namespace ECS
             }
 
             template<class C>
-            bool HasComponent(const Entity &entity) const
+            [[nodiscard]] bool HasComponent(const Entity &entity) const
             {
                 return entity.componentsName.contains(typeid(C).name());
+            }
+
+            template<class C>
+            [[nodiscard]] std::unique_ptr<AComponent> &GetComponent(Entity &entity)
+            {
+                assert(ECS::GetInstance().HasEntity(entity));
+
+                for (auto &component : p_registeredComponents) {
+                    if (typeid(C).name() == component.first)
+                        return p_registeredComponents[typeid(C).name()];
+                }
+                throw std::runtime_error("Component not found");
             }
 
             template<class C>

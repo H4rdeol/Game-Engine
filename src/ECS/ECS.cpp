@@ -109,4 +109,14 @@ namespace ECS
     {
         return p_componentsMapper;
     }
+
+    std::shared_ptr<SystemsManager> ECS::getSystemsManager() {
+        return p_systemsManager;
+    }
+
+    ECS::ECS()
+    {
+        p_componentsMapper = std::make_shared<ComponentsManager>();
+        p_systemsManager = std::make_shared<SystemsManager>();
+    }
 }

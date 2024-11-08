@@ -21,9 +21,11 @@ namespace App {
                 unsigned int frameRateLimit = 60;
                 unsigned int bytePerPixel = 32;
             };
-            Application(AppSettings settings);
+
+            [[maybe_unused]] explicit Application(const AppSettings &settings);
             ~Application();
             void run();
+            sf::RenderWindow &getWindow();
         private:
             sf::RenderWindow p_window;
     };

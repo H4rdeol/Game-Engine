@@ -7,8 +7,10 @@
 
 #include "Components.hpp"
 #include "ECS/Entity.h"
+#include "ECS/ECS.hpp"
 
 #include <typeinfo>
+#include <iostream>
 
 namespace ECS::Components
 {
@@ -45,7 +47,8 @@ namespace ECS::Components
         m_sprite.back().setTexture(m_texture.back());
         va_end(args);
         IdToIndex_p[entity.id] = m_sprite.size() - 1;
-        entity.componentsName.insert(typeid(PositionsComponents).name());
+        entity.componentsName.insert(typeid(SpriteComponents).name());
+        (*ECS::ECS::GetInstance().getSystemsManager())[SystemsManager::SystemType::SPRITE]->AddEntity(entity);
     }
 
     void SpriteComponents::RemoveFromEntity(Entity &entity)

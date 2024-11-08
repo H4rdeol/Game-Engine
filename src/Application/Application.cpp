@@ -6,9 +6,10 @@
 */
 
 #include "Application.hpp"
+#include "ECS/ECS.hpp"
 
 namespace App {
-    Application::Application(AppSettings settings)
+    [[maybe_unused]] [[maybe_unused]] Application::Application(const AppSettings& settings)
     {
         p_window.create(
             sf::VideoMode(
@@ -30,14 +31,21 @@ namespace App {
 
     void Application::run()
     {
+        sf::Event event{};
+
         while (p_window.isOpen()) {
-            sf::Event event;
+            p_window.clear();
             while (p_window.pollEvent(event)) {
                 if (event.type == sf::Event::Closed)
                     p_window.close();
             }
-            p_window.clear();
+            ECS::ECS::GetInstance().getSystemsManager()->Update(0.0f);
             p_window.display();
         }
+    }
+
+    sf::RenderWindow &Application::getWindow()
+    {
+        return p_window;
     }
 }

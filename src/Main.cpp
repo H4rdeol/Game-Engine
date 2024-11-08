@@ -5,6 +5,7 @@
 ** Main.cpp
 */
 
+#include <iostream>
 #include "Application/Application.hpp"
 #include "ECS/ECS.hpp"
 #include "ComponentManager/Components.hpp"
@@ -25,6 +26,7 @@ int main(UNUSED int argc, UNUSED char *argv[])
             32
         }
     };
+    ECS::ECS::GetInstance().App = &myApp;
 
     ECS::ECS::GetInstance().AddEntity();
     ECS::ECS::GetInstance().getComponentsMapper()->AddComponent<ECS::Components::PositionsComponents, double, double>(
@@ -40,9 +42,6 @@ int main(UNUSED int argc, UNUSED char *argv[])
     );
 
 
-
-
-    ECS::ECS::GetInstance().RemoveEntity(0);
     myApp.run();
     ECS::ECS::Shutdown();
     return 0;
