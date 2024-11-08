@@ -5,7 +5,6 @@
 ** Main.cpp
 */
 
-#include <iostream>
 #include "Application/Application.hpp"
 #include "ECS/ECS.hpp"
 #include "ComponentManager/Components.hpp"

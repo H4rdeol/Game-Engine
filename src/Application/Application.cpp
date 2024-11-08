@@ -9,7 +9,7 @@
 #include "ECS/ECS.hpp"
 
 namespace App {
-    [[maybe_unused]] [[maybe_unused]] Application::Application(const AppSettings& settings)
+    [[maybe_unused]] Application::Application(const AppSettings& settings)
     {
         p_window.create(
             sf::VideoMode(

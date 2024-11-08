@@ -10,7 +10,6 @@
 #include "ECS/ECS.hpp"
 
 #include <typeinfo>
-#include <iostream>
 
 namespace ECS::Components
 {

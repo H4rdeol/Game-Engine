@@ -9,8 +9,6 @@
 #include "ComponentManager/ComponentManager.hpp"
 #include "ComponentManager/Components.hpp"
 
-#include <iostream>
-
 namespace ECS {
     SystemsManager::SystemsManager()
     {
