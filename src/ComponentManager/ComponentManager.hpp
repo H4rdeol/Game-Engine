@@ -61,6 +61,16 @@ namespace ECS
             }
 
             template<class C>
+            [[nodiscard]] C &GetComponent() const
+            {
+                for (auto &component : p_registeredComponents) {
+                    if (typeid(C).name() == component.first)
+                        return dynamic_cast<C &>(*component.second);
+                }
+                throw std::runtime_error("Component not found");
+            }
+
+            template<class C>
             void RegisterComponent()
             {
                 assert(!p_registeredComponents.contains(typeid(C).name()));

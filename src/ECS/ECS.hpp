@@ -46,8 +46,8 @@ namespace ECS
             [[maybe_unused]] void RemoveEntity(const Entity &entity);
 
             [[maybe_unused]] void PrintEntities() const; // * Use for debug
-
-            App::Application *App{};
+        public:
+            App::Application *App = nullptr;
         private:
             ECS();
             ~ECS() = default;

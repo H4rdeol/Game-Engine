@@ -28,13 +28,13 @@ int main(UNUSED int argc, UNUSED char *argv[])
     ECS::ECS::GetInstance().AddEntity();
     ECS::ECS::GetInstance().getComponentsMapper()->AddComponent<ECS::Components::PositionsComponents, double, double>(
         ECS::ECS::GetInstance().getEntity(0),
-        dynamic_cast<ECS::Components::PositionsComponents&>(*ECS::ECS::GetInstance().getComponentsMapper()->GetComponent<ECS::Components::PositionsComponents>(ECS::ECS::GetInstance().getEntity(0))),
+        ECS::ECS::GetInstance().getComponentsMapper()->GetComponent<ECS::Components::PositionsComponents>(),
         300.0,
         500.0
     );
     ECS::ECS::GetInstance().getComponentsMapper()->AddComponent<ECS::Components::SpriteComponents, char *>(
         ECS::ECS::GetInstance().getEntity(0),
-        dynamic_cast<ECS::Components::SpriteComponents&>(*ECS::ECS::GetInstance().getComponentsMapper()->GetComponent<ECS::Components::SpriteComponents>(ECS::ECS::GetInstance().getEntity(0))),
+        ECS::ECS::GetInstance().getComponentsMapper()->GetComponent<ECS::Components::SpriteComponents>(),
         name
     );
 
