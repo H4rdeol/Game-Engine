@@ -63,6 +63,7 @@ namespace ECS
         }
         if (it == p_entities.end())
             throw ECSError("Entity with ID = " + std::to_string(id) + " does not exist");
+        //TODO @LO: Remove all components from the entity
         p_entities.erase(it);
     }
 

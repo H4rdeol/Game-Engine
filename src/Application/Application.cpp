@@ -32,6 +32,16 @@ namespace App {
     void Application::run()
     {
         sf::Event event{};
+        //write FPS in top right corner
+        sf::Font font;
+        font.loadFromFile("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf");
+        sf::Text text;
+        text.setFont(font);
+        text.setCharacterSize(24);
+        text.setFillColor(sf::Color::Red);
+        text.setPosition(10, 10);
+        text.setString("FPS: 0");
+        sf::Clock p_clock;
 
         while (p_window.isOpen()) {
             p_window.clear();
@@ -39,6 +49,8 @@ namespace App {
                 if (event.type == sf::Event::Closed)
                     p_window.close();
             }
+            p_window.draw(text);
+            text.setString("FPS: " + std::to_string(1.0f / p_clock.restart().asSeconds()));
             ECS::ECS::GetInstance().getSystemsManager()->Update(0.0f);
             p_window.display();
         }

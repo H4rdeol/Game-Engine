@@ -36,12 +36,12 @@ namespace ECS {
     {
         for (auto &entity : _entities) {
             if (ECS::GetInstance().getComponentsMapper()->HasComponent<Components::SpriteComponents>(entity)) {
-                auto &spriteComponent = dynamic_cast<Components::SpriteComponents&>(*(ECS::GetInstance().getComponentsMapper()->GetComponent<Components::SpriteComponents>(entity)));
-                auto &positionComponent = dynamic_cast<Components::PositionsComponents&>(*(ECS::GetInstance().getComponentsMapper()->GetComponent<Components::PositionsComponents>(entity)));
+                auto &spriteComponent = ECS::GetInstance().getComponentsMapper()->GetComponent<Components::SpriteComponents>();
+                auto &positionComponent = ECS::GetInstance().getComponentsMapper()->GetComponent<Components::PositionsComponents>();
 
                 for (std::size_t i = 0; i < spriteComponent.m_sprite.size(); i++) {
                     spriteComponent.m_sprite[i].setPosition((float)positionComponent.m_positions[i].first, (float)positionComponent.m_positions[i].second);
-                    ECS::GetInstance().App->getWindow().draw(spriteComponent.m_sprite[i]);
+//                    ECS::GetInstance().App->getWindow().draw(spriteComponent.m_sprite[i]);
                 }
             }
         }

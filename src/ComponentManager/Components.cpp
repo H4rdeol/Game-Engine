@@ -10,6 +10,7 @@
 #include "ECS/ECS.hpp"
 
 #include <typeinfo>
+#include <glm/glm.hpp>
 
 namespace ECS::Components
 {
@@ -59,6 +60,40 @@ namespace ECS::Components
         m_sprite.pop_back();
         m_texture.pop_back();
         entity.componentsName.erase(typeid(PositionsComponents).name());
+        IdToIndex_p.erase(index);
+    }
+
+    void TransformComponents::AddToEntity(Entity &entity, va_list args, ...)
+    {
+        va_start(args, args);
+        m_positions.emplace_back(
+            va_arg(args, double),
+            va_arg(args, double)
+        );
+        m_scales.emplace_back(va_arg(args, double));
+        m_transforms.emplace_back(
+            va_arg(args, double),
+            va_arg(args, double),
+            va_arg(args, double),
+            va_arg(args, double)
+        );
+        va_end(args);
+        IdToIndex_p[entity.id] = m_positions.size() - 1;
+        entity.componentsName.insert(typeid(TransformComponents).name());
+
+    }
+
+    void TransformComponents::RemoveFromEntity(Entity &entity)
+    {
+        std::size_t index = IdToIndex_p[entity.id];
+
+        std::swap(m_positions[index], m_positions.back());
+        std::swap(m_scales[index], m_scales.back());
+        std::swap(m_transforms[index], m_transforms.back());
+        m_positions.pop_back();
+        m_scales.pop_back();
+        m_transforms.pop_back();
+        entity.componentsName.erase(typeid(TransformComponents).name());
         IdToIndex_p.erase(index);
     }
 }

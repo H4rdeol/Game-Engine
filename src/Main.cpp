@@ -19,24 +19,25 @@ int main(UNUSED int argc, UNUSED char *argv[])
         {
             sf::Vector2u(1920, 1080),
             "Snook",
-            60,
+            0,
             32
         }
     };
     ECS::ECS::GetInstance().App = &myApp;
-
-    ECS::ECS::GetInstance().AddEntity();
-    ECS::ECS::GetInstance().getComponentsMapper()->AddComponent<ECS::Components::PositionsComponents, double, double>(
-        ECS::ECS::GetInstance().getEntity(0),
-        ECS::ECS::GetInstance().getComponentsMapper()->GetComponent<ECS::Components::PositionsComponents>(),
-        300.0,
-        500.0
-    );
-    ECS::ECS::GetInstance().getComponentsMapper()->AddComponent<ECS::Components::SpriteComponents, char *>(
-        ECS::ECS::GetInstance().getEntity(0),
-        ECS::ECS::GetInstance().getComponentsMapper()->GetComponent<ECS::Components::SpriteComponents>(),
-        name
-    );
+    for (int i = 0; i < 100; i++) {
+        ECS::ECS::GetInstance().AddEntity();
+        ECS::ECS::GetInstance().getComponentsMapper()->AddComponent<ECS::Components::PositionsComponents, double, double>(
+                ECS::ECS::GetInstance().getEntity(i),
+                ECS::ECS::GetInstance().getComponentsMapper()->GetComponent<ECS::Components::PositionsComponents>(),
+                300.0,
+                500.0
+        );
+        ECS::ECS::GetInstance().getComponentsMapper()->AddComponent<ECS::Components::SpriteComponents, char *>(
+                ECS::ECS::GetInstance().getEntity(i),
+                ECS::ECS::GetInstance().getComponentsMapper()->GetComponent<ECS::Components::SpriteComponents>(),
+                name
+        );
+    }
 
     myApp.run();
     ECS::ECS::Shutdown();

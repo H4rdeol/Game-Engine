@@ -4,7 +4,10 @@ project(MyProject)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+add_library(glm INTERFACE)
+target_include_directories(glm INTERFACE /usr/include)
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
+
 add_executable(MyProject
     src/Main.cpp
     src/Application/Application.cpp
@@ -22,4 +25,4 @@ add_executable(MyProject
 target_include_directories(MyProject PUBLIC include/Interface)
 target_include_directories(MyProject PUBLIC include/Abstract)
 target_include_directories(MyProject PRIVATE src)
-target_link_libraries(MyProject PRIVATE sfml-graphics sfml-window sfml-system)
+target_link_libraries(MyProject PRIVATE sfml-graphics sfml-window sfml-system glm)
