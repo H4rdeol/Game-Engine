@@ -41,12 +41,18 @@ namespace ECS::Components
         va_start(args, args);
         std::string path(va_arg(args, char *));
 
-        m_texture.emplace_back();
-        m_texture.back().loadFromFile(path);
-        m_sprite.emplace_back();
-        m_sprite.back().setTexture(m_texture.back());
-        va_end(args);
-        IdToIndex_p[entity.id] = m_sprite.size() - 1;
+        if (std::find_if(_alreadyLoaded.begin(), _alreadyLoaded.end(), [&path](const std::pair<std::string, std::size_t> &pair) {
+            return pair.first == path;
+        }) != _alreadyLoaded.end()) {
+            m_texture.emplace_back(sf::Texture(), m_vertexArray.size());
+            m_texture.back().first.loadFromFile(path);
+            m_vertexArray.emplace_back(sf::Quads, 4);
+            _alreadyLoaded.emplace_back(path, m_texture.size() - 1);
+            IdToIndex_p[entity.id] = m_texture.size() - 1;
+        } else {
+            IdToIndex_p[entity.id] = _alreadyLoaded[];
+        }
+
         entity.componentsName.insert(typeid(SpriteComponents).name());
         (*ECS::ECS::GetInstance().getSystemsManager())[SystemsManager::SystemType::SPRITE]->AddEntity(entity);
     }
@@ -55,10 +61,6 @@ namespace ECS::Components
     {
         std::size_t index = IdToIndex_p[entity.id];
 
-        std::swap(m_sprite[index], m_sprite.back());
-        std::swap(m_texture[index], m_texture.back());
-        m_sprite.pop_back();
-        m_texture.pop_back();
         entity.componentsName.erase(typeid(PositionsComponents).name());
         IdToIndex_p.erase(index);
     }

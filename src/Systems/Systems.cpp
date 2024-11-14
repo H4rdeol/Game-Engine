@@ -39,10 +39,7 @@ namespace ECS {
                 auto &spriteComponent = ECS::GetInstance().getComponentsMapper()->GetComponent<Components::SpriteComponents>();
                 auto &positionComponent = ECS::GetInstance().getComponentsMapper()->GetComponent<Components::PositionsComponents>();
 
-                for (std::size_t i = 0; i < spriteComponent.m_sprite.size(); i++) {
-                    spriteComponent.m_sprite[i].setPosition((float)positionComponent.m_positions[i].first, (float)positionComponent.m_positions[i].second);
-//                    ECS::GetInstance().App->getWindow().draw(spriteComponent.m_sprite[i]);
-                }
+
             }
         }
     }

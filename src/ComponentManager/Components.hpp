@@ -9,6 +9,7 @@
 
 #include <cstdarg>
 #include <vector>
+#include <unordered_map>
 #include <SFML/Graphics.hpp>
 #include <glm/gtx/quaternion.hpp>
 
@@ -34,9 +35,11 @@ namespace ECS::Components
 
             void AddToEntity(Entity &entity, va_list args, ...) override;
             void RemoveFromEntity(Entity &entity) override;
-            std::vector<sf::Sprite> m_sprite;
+        public:
+            std::vector<sf::VertexArray> m_vertexArray;
+            std::vector<std::pair<sf::Texture, std::size_t>> m_texture;
         private:
-            std::vector<sf::Texture> m_texture;
+            std::vector<std::pair<std::string, std::size_t>> _alreadyLoaded;
     };
 
     class TransformComponents: public AComponent {
