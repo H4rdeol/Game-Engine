@@ -8,6 +8,7 @@
 #include "Systems.hpp"
 #include "ComponentManager/ComponentManager.hpp"
 #include "ComponentManager/Components.hpp"
+#include "ECS/ECS.hpp"
 
 namespace ECS {
     SystemsManager::SystemsManager()
@@ -39,10 +40,10 @@ namespace ECS {
                 auto &spriteComponent = ECS::GetInstance().getComponentsMapper()->GetComponent<Components::SpriteComponents>();
                 auto &positionComponent = ECS::GetInstance().getComponentsMapper()->GetComponent<Components::PositionsComponents>();
 
-                for (auto &[entityId, texture] : IdToIndex_p) {
+                for (auto &[entityId, texture] : spriteComponent.m_texture) {
                     auto &vertexArray = spriteComponent.m_vertexArray[texture];
                     auto &texturePair = spriteComponent.m_texture[texture];
-                    auto &position = positionComponent.m_positions[positionComponent.IdToIndex_p[entityId]];
+                    auto &position = positionComponent.m_positions[positionComponent.IdToIndex_p[entity.id]];
 
                     vertexArray[0].position = sf::Vector2f(position.first, position.second);
                     vertexArray[1].position = sf::Vector2f(position.first + texturePair.first.getSize().x, position.second);
@@ -54,6 +55,7 @@ namespace ECS {
                     vertexArray[2].texCoords = sf::Vector2f(texturePair.first.getSize().x, texturePair.first.getSize().y);
                     vertexArray[3].texCoords = sf::Vector2f(0, texturePair.first.getSize().y);
                 }
+                ECS::GetInstance().App->getWindow().draw(spriteComponent.m_vertexArray[0], &spriteComponent.m_texture[0].first);
             }
         }
     }

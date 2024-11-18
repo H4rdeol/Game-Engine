@@ -39,7 +39,7 @@ namespace ECS::Components
             std::vector<sf::VertexArray> m_vertexArray;
             std::vector<std::pair<sf::Texture, std::size_t>> m_texture;
         private:
-            std::vector<std::pair<std::string, std::size_t>> _alreadyLoaded;
+            std::unordered_map<std::string, std::size_t> _alreadyLoaded;
     };
 
     class TransformComponents: public AComponent {

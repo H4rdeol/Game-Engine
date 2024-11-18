@@ -29,8 +29,8 @@ int main(UNUSED int argc, UNUSED char *argv[])
         ECS::ECS::GetInstance().getComponentsMapper()->AddComponent<ECS::Components::PositionsComponents, double, double>(
                 ECS::ECS::GetInstance().getEntity(i),
                 ECS::ECS::GetInstance().getComponentsMapper()->GetComponent<ECS::Components::PositionsComponents>(),
-                300.0,
-                500.0
+                0.0,
+                0.0
         );
         ECS::ECS::GetInstance().getComponentsMapper()->AddComponent<ECS::Components::SpriteComponents, char *>(
                 ECS::ECS::GetInstance().getEntity(i),

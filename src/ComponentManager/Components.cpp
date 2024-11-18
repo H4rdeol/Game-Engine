@@ -47,10 +47,10 @@ namespace ECS::Components
             m_texture.emplace_back(sf::Texture(), m_vertexArray.size());
             m_texture.back().first.loadFromFile(path);
             m_vertexArray.emplace_back(sf::Quads, 4);
-            _alreadyLoaded.emplace_back(path, m_texture.size() - 1);
+            _alreadyLoaded.emplace(path, m_texture.size() - 1);
             IdToIndex_p[entity.id] = m_texture.size() - 1;
         } else {
-            IdToIndex_p[entity.id] = _alreadyLoaded[path].second;
+            IdToIndex_p[entity.id] = _alreadyLoaded[path];
         }
 
         entity.componentsName.insert(typeid(SpriteComponents).name());
