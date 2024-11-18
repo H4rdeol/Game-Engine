@@ -50,7 +50,7 @@ namespace ECS::Components
             _alreadyLoaded.emplace_back(path, m_texture.size() - 1);
             IdToIndex_p[entity.id] = m_texture.size() - 1;
         } else {
-            IdToIndex_p[entity.id] = _alreadyLoaded[];
+            IdToIndex_p[entity.id] = _alreadyLoaded[path].second;
         }
 
         entity.componentsName.insert(typeid(SpriteComponents).name());
