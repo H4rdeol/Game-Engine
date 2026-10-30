@@ -1,28 +1,33 @@
-cmake_minimum_required(VERSION 3.12)
-project(MyProject)
+cmake_minimum_required(VERSION 3.20)
 
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+project(GameEngine)
 
-add_library(glm INTERFACE)
-target_include_directories(glm INTERFACE /usr/include)
-find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(MyProject
-    src/Main.cpp
-    src/Application/Application.cpp
-    src/ECS/ECS.cpp
-    src/Scene/Scene.cpp
-    src/ComponentManager/ComponentManager.cpp
-    src/ComponentManager/Components.cpp
-    src/Systems/Systems.cpp
-    src/Systems/Systems.hpp
-    include/Interface/ISystems.hpp
-    include/Abstract/ASystems.hpp
-    include/Abstract/ASystems.cpp
+set(SOURCE_FILES
+	src/Main.cpp
+	src/ECS/components/PositionComponent/PositionComponent.cpp
 )
 
-target_include_directories(MyProject PUBLIC include/Interface)
-target_include_directories(MyProject PUBLIC include/Abstract)
-target_include_directories(MyProject PRIVATE src)
-target_link_libraries(MyProject PRIVATE sfml-graphics sfml-window sfml-system glm)
+add_compile_options(
+    -Wall
+    -Wextra
+	-Wpedantic
+)
+
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+
+file(GLOB COMPONENT_DIRS LIST_DIRECTORIES true
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/ECS/components/*"
+)
+
+
+target_include_directories(${PROJECT_NAME} PRIVATE
+    ${COMPONENT_DIRS}
+)
+
+include_directories(
+	include
+)
+

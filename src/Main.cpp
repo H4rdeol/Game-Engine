@@ -1,45 +1,15 @@
-/*
-** EPITECH PROJECT, 2024
-** GE [WSL: Ubuntu]
-** File description:
-** Main.cpp
-*/
+#include <print>
+#include "PositionComponent.hpp"
 
-#include "Application/Application.hpp"
-#include "ECS/ECS.hpp"
-#include "ComponentManager/Components.hpp"
-#include "ComponentManager/ComponentManager.hpp"
-
-int main(UNUSED int argc, UNUSED char *argv[])
+int main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[])
 {
-    ECS::ECS::Init();
-    char name[] = "assets/snook.jpg";
+    std::println("Hello World!");
 
-    App::Application myApp {
-        {
-            sf::Vector2u(1920, 1080),
-            "Snook",
-            0,
-            32
-        }
-    };
-    ECS::ECS::GetInstance().App = &myApp;
-    for (int i = 0; i < 100; i++) {
-        ECS::ECS::GetInstance().AddEntity();
-        ECS::ECS::GetInstance().getComponentsMapper()->AddComponent<ECS::Components::PositionsComponents, double, double>(
-                ECS::ECS::GetInstance().getEntity(i),
-                ECS::ECS::GetInstance().getComponentsMapper()->GetComponent<ECS::Components::PositionsComponents>(),
-                0.0,
-                0.0
-        );
-        ECS::ECS::GetInstance().getComponentsMapper()->AddComponent<ECS::Components::SpriteComponents, char *>(
-                ECS::ECS::GetInstance().getEntity(i),
-                ECS::ECS::GetInstance().getComponentsMapper()->GetComponent<ECS::Components::SpriteComponents>(),
-                name
-        );
-    }
+	Gameol::ECS::PositionComponent positionComponent;
 
-    myApp.run();
-    ECS::ECS::Shutdown();
-    return 0;
+	positionComponent.addToEntity(1, { 10.0f, 20.0f });
+	positionComponent.addToEntity(2, { 30.0f, 40.0f });
+
+	positionComponent.removeFromEntity(1);
+	return 0;
 }
